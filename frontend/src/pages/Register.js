@@ -130,8 +130,12 @@ const Register = () => {
                             type="tel"
                             name="phone"
                             placeholder="Phone Number"
+                            maxLength="10"
                             value={formData.phone}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                                const value = e.target.value.replace(/\D/g, ""); // remove non-digits
+                                setFormData({ ...formData, phone: value });
+                            }}
                         />
                     </div>
                     
@@ -168,20 +172,7 @@ const Register = () => {
                         </>
                     )}
                     
-                    {formData.userType === 'user' && (
-                        <div className="form-group">
-                            <select
-                                name="membershipType"
-                                value={formData.membershipType}
-                                onChange={handleChange}
-                            >
-                                <option value="">Select Membership Type</option>
-                                <option value="basic">Basic</option>
-                                <option value="premium">Premium</option>
-                                <option value="vip">VIP</option>
-                            </select>
-                        </div>
-                    )}
+                    
                     
                     <button type="submit" className="auth-button" disabled={loading}>
                         {loading ? 'Creating Account...' : 'Create Account'}

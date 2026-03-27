@@ -24,7 +24,7 @@ const UserDashboard = () => {
     useEffect(() => {
         if (activeTab === 'trainers') {
             loadTrainers();
-        } else if (activeTab === 'my-subscriptions') {
+        } else if (activeTab === 'my-subscriptions and payment') {
             loadMySubscriptions();
         }
     }, [activeTab]);
@@ -349,6 +349,7 @@ const UserDashboard = () => {
                                     >
                                         View Details →
                                     </button>
+
                                     <button 
                                         className="download-pdf-btn"
                                         onClick={() => handleDownloadSubscriptionPDF(subscription)}

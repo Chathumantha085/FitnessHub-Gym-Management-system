@@ -24,9 +24,16 @@ const userSchema = new mongoose.Schema({
         default: 'user'
     },
     phone: {
-        type: String,
-        trim: true
-    },
+    type: String,
+    required: true,
+    trim: true,
+    validate: {
+        validator: function(v) {
+            return /^\d{10}$/.test(v);
+        },
+        message: "Phone number must be exactly 10 digits"
+    }
+},
     dateOfBirth: {
         type: Date
     },
@@ -38,10 +45,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    membershipType: {
+    /*membershipType: {
         type: String,
         trim: true
-    },
+    },*/
     isActive: {
         type: Boolean,
         default: true
@@ -58,10 +65,11 @@ const userSchema = new mongoose.Schema({
     approvedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
-}, {
-    timestamps: true
-});
+    },
+     timestamps: String
+},
+   
+);
 
 // Hash password before saving
 userSchema.pre('save', async function(next) {
